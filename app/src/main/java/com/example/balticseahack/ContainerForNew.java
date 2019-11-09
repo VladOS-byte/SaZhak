@@ -20,7 +20,7 @@ import java.sql.Blob;
 
 public class ContainerForNew extends LinearLayout {
 
-    ContainerForNew(String line, Bitmap im, int maxImageSize, boolean color, Context context){
+    public ContainerForNew(String line, Bitmap im, int maxImageSize, boolean color, Context context){
         super(context);
         super.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         super.setOrientation(LinearLayout.VERTICAL);

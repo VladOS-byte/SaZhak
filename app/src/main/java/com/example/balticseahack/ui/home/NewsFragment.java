@@ -1,38 +1,36 @@
-package com.example.balticseahack;
+package com.example.balticseahack.ui.home;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import android.view.MenuItem;
-
-import androidx.core.view.GravityCompat;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.lifecycle.ViewModelProviders;
 
-import com.example.balticseahack.ui.gallery.MapsFragment;
-import com.example.balticseahack.ui.home.NewsFragment;
-import com.example.balticseahack.ui.slideshow.AccountFragment;
-import com.example.balticseahack.ui.tools.ToolsFragment;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
+import com.example.balticseahack.ContainerForNew;
+import com.example.balticseahack.R;
+import com.example.balticseahack.Sender;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
+import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class NewsFragment extends Fragment {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private NewsViewModel newsViewModel;
 
-        /*String news = "1\u02ad2\u02ad3\u02ad4\u02ad5\u02ad6\u02ad7\u02ad8\u02ad9\u02ad10";
+    public View onCreateView(@NonNull LayoutInflater inflater,
+            ViewGroup container, Bundle savedInstanceState) {
+        newsViewModel =
+                ViewModelProviders.of(this).get(NewsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_news, container, false);
+
+        String news = "1\u02ad2\u02ad3\u02ad4\u02ad5\u02ad6\u02ad7\u02ad8\u02ad9\u02ad10";
 
         try {
             news = new Sender().execute("readResentNews").get();//получаем последние новости,юникод разделителя: U+02A
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 + "\u02ac" + "exc" + "\u02ad";
 
         Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
+        getActivity().getWindowManager().getDefaultDisplay().getSize(size);
         int displayWibth = size.x;
 
         Bitmap[] set = new Bitmap[10];
@@ -67,76 +65,12 @@ public class MainActivity extends AppCompatActivity {
         set[3] = BitmapFactory.decodeResource(getResources(), R.drawable.festival);
         set[4] = BitmapFactory.decodeResource(getResources(), R.drawable.exc);
 
-        LinearLayout content_main = findViewById(R.id.main_content_scroll_layout);
+        LinearLayout content_main = root.findViewById(R.id.news_scroll_layout);
+        content_main.addView(new TextView(getActivity()));
         String[] newsArr = news.split("\u02ad");
         for(int i = 0; i < 5; i++){
-            content_main.addView(new ContainerForNew(newsArr[i], set[i], displayWibth, i%2 == 1, this));
-        }*/
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //toolbar.setNavigationIcon(R.drawable.navicon);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-    }
-
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        Fragment fragment = null;
-        Intent intent = null;
-
-        switch (id) {
-            case R.id.nav_home:
-                fragment = new NewsFragment();
-                break;
-            case R.id.nav_gallery:
-                fragment = new MapsFragment();
-                break;
-            case R.id.nav_slideshow:
-                fragment = new AccountFragment();
-                break;
-            case R.id.nav_tools:
-                fragment = new ToolsFragment();
-                break;
+            content_main.addView(new ContainerForNew(newsArr[i], set[i], displayWibth, i%2 == 1, getActivity()));
         }
-
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.container, fragment);
-            ft.commit();
-        } else {
-            startActivity(intent);
-        }
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return root;
     }
 }

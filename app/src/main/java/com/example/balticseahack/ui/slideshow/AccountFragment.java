@@ -1,4 +1,4 @@
-package com.example.balticseahack.ui.home;
+package com.example.balticseahack.ui.slideshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,16 +12,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.balticseahack.R;
 
-public class HomeFragment extends Fragment {
+public class AccountFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private AccountViewModel accountViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        
+        accountViewModel =
+                ViewModelProviders.of(this).get(AccountViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_account, container, false);
+
+
         return root;
     }
 }

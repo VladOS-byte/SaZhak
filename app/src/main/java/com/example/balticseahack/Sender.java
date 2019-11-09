@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-class Sender extends AsyncTask<String,Integer,String>{//класс отправления
+public class Sender extends AsyncTask<String,Integer,String>{//класс отправления
     @Override
     protected String doInBackground(String... command0) {//вне фонового режима метод отправления на сервер переданных данных
         try {
