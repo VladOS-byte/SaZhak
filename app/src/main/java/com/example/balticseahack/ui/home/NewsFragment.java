@@ -32,13 +32,13 @@ public class NewsFragment extends Fragment {
 
         String news = "1\u02ad2\u02ad3\u02ad4\u02ad5\u02ad6\u02ad7\u02ad8\u02ad9\u02ad10";
 
-        try {
+        /*try {
             news = new Sender().execute("readResentNews").get();//получаем последние новости,юникод разделителя: U+02A
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
 
         news = "";
 

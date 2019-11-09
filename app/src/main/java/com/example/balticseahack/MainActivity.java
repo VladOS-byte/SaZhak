@@ -18,6 +18,8 @@ import com.example.balticseahack.ui.home.NewsFragment;
 import com.example.balticseahack.ui.slideshow.AccountFragment;
 import com.example.balticseahack.ui.tools.ToolsFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.yandex.mapkit.MapKitFactory;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         /*String news = "1\u02ad2\u02ad3\u02ad4\u02ad5\u02ad6\u02ad7\u02ad8\u02ad9\u02ad10";
