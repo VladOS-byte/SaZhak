@@ -19,18 +19,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
-
-    <ScrollView
-        android:id="@+id/scroll_news"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="229dp">
-
-        <LinearLayout
-            android:id="@+id/main_content_scroll_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

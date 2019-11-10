@@ -98,29 +98,39 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         Fragment fragment = null;
         Intent intent = null;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         switch (id) {
             case R.id.nav_home:
                 fragment = new NewsFragment();
+                ft.replace(R.id.nav_home, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
             case R.id.nav_gallery:
                 fragment = new MapsFragment();
+                ft.replace(R.id.nav_gallery, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
             case R.id.nav_slideshow:
                 fragment = new AccountFragment();
+                ft.replace(R.id.nav_slideshow, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
             case R.id.nav_tools:
                 fragment = new ToolsFragment();
+                ft.replace(R.id.nav_tools, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
         }
 
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.container, fragment);
-            ft.commit();
-        } else {
-            startActivity(intent);
-        }
+//        if (fragment != null) {
+//        } else {
+//            startActivity(intent);
+//        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
